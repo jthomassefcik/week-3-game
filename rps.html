@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="game">
+        <p>Press r, p or s to start playing!</p>
+    </div>
+    <div id="results"></div>
+
+    <script>
+        var rps = {
+            wins: 0,
+            ties: 0,
+            losses: 0,
+            currentUserGuess: "",
+            currentComputerGuess: "",
+            makeComputerGuess: function () {
+                var computerChoices = ["r", "p", "s"];
+                rps.currentComputerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            },
+            handleUserGuess: function (event) {
+                var key = event.key;
+                if (key === "r" || key == "p" || key == "s") {
+                    rps.currentUserGuess = event.key;
+                    rps.makeComputerGuess();
+                    rps.playGame();
+                    rps.printResults();
+                }
+            },
+            printResults: function(){
+                var html = "";
+                html += "<div>Your Guess: " + rps.currentUserGuess + "</div>";
+                html += "<div>Computer's Guess: " + rps.currentComputerGuess + "</div>";
+                html += "<div>Wins: " + rps.wins + "</div>";
+                html += "<div>Losses: " + rps.losses + "</div>";
+                html += "<div>Ties: " + rps.ties + "</div>";
+                document.querySelector("#results").innerHTML = html;
+            },
+            playGame: function () {
+                if (rps.currentComputerGuess == rps.currentUserGuess) {
+                    rps.ties++;
+                }
+
+                if (( rps.currentUserGuess === "r") && (rps.currentComputerGuess === "s")) {
+                    rps.wins++;
+                }
+                
+                if (( rps.currentUserGuess === "r") && (rps.currentComputerGuess === "p")) {
+                    rps.losses++;
+                }
+                
+                if (( rps.currentUserGuess === "s") && (rps.currentComputerGuess === "r")) {
+                    rps.losses++;
+                }
+                
+                if (( rps.currentUserGuess === "s") && (rps.currentComputerGuess === "p")) {
+                    rps.wins++;
+                }
+                
+                if (( rps.currentUserGuess === "p") && (rps.currentComputerGuess === "r")) {
+                    rps.wins++;
+                }
+                
+                if (( rps.currentUserGuess === "p") && (rps.currentComputerGuess === "s")) {
+                    rps.losses++;
+                }
+
+            }
+        };
+
+
+        document.onkeyup = rps.handleUserGuess;
+    </script>
+</body>
+
+</html>
