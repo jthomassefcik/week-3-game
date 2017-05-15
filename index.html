@@ -33,7 +33,7 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li type="button" class="btn btn-default navbar-btn" id="startGame"> Click to Start Game</li>
+          <li type="button" class="btn btn-default navbar-btn" id="startGame"> Click for New Word</li>
         </ul>
       </div>
       <!--/.nav-collapse -->
@@ -67,18 +67,27 @@
     //printblanks("string")
 
     //document.onkeyup = hangmans.startGame
-     $("#startGame").on("click", function () {
-       $("#instructions").empty()
-       $("<div>").html("Press a letter key to guess...").appendTo($("#instructions"));
-       blanksforAnswer(chooseWord())
-       console.log(answerWord)
-       
 
-     })
+    
 
-     
 
-     
+    // $("#startGame").on("click", function () {
+    //   $("#instructions").empty()
+    //   $("<div>").html("Press a letter key to guess...").appendTo($("#current-word"));
+    //   blanksforAnswer(chooseWord())
+    //   console.log(answerWord)
+
+
+    // })
+    $("#startGame").click(resetHangman)
+    document.onkeyup = verifyLetter;
+
+    console.log(displayedAnswer);
+    console.log(answerWord);
+
+
+
+
 
     //document.onclick = hangmans.start
   </script>
